@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drone Flying Simulation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Drone Flying Simulation</h1>
+    <p class="subtitle">Plan, simulate, and visualize a drone mission in your browser.</p>
+  </header>
+
+  <main class="container">
+    <section class="panel" aria-labelledby="mission-setup-title">
+      <h2 id="mission-setup-title">Mission Setup</h2>
+
+      <form id="mission-form">
+        <div class="grid two">
+          <label>
+            <span>Location</span>
+            <input type="text" id="location" placeholder="e.g., Montgomery, AL" required />
+          </label>
+
+          <label>
+            <span>Route Length (km)</span>
+            <input type="number" id="routeKm" min="0.5" step="0.1" value="3.0" required />
+          </label>
+
+          <label>
+            <span>Flight Altitude (m)</span>
+            <input type="number" id="altitude" min="5" step="1" value="60" required />
+          </label>
+
+          <label>
+            <span>Air Speed (m/s)</span>
+            <input type="number" id="speed" min="1" step="0.5" value="8" required />
+          </label>
+
+          <label>
+            <span>Initial Battery (%)</span>
+            <input type="number" id="batteryPct" min="10" max="100" step="1" value="100" required />
+          </label>
+
+          <label>
+            <span>Battery Health (0.5–1.0)</span>
+            <input type="number" id="batteryHealth" min="0.5" max="1" step="0.01" value="0.95" required />
+          </label>
+
+          <label>
+            <span>Payload (kg)</span>
+            <input type="number" id="payloadKg" min="0" step="0.1" value="0.2" required />
+          </label>
+
+          <label>
+            <span>Wind Speed (m/s)</span>
+            <input type="number" id="windSpeed" min="0" step="0.5" value="3" required />
+          </label>
+
+          <label>
+            <span>Wind Direction</span>
+            <select id="windDir">
+              <option value="headwind">Headwind</option>
+              <option value="tailwind">Tailwind</option>
+              <option value="crosswind">Crosswind</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Temperature (°C)</span>
+            <input type="number" id="tempC" step="1" value="25" required />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="simulateBtn" class="btn primary">Simulate</button>
+          <button type="button" id="startBtn" class="btn">Start</button>
+          <button type="button" id="pauseBtn" class="btn">Pause</button>
+          <button type="button" id="resetBtn" class="btn danger">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="telemetry-title">
+      <h2 id="telemetry-title">Telemetry</h2>
+      <div class="grid two">
+        <div class="telemetry-block">
+          <div class="label">Battery</div>
+          <div class="meter">
+            <div id="batteryBar" class="meter-bar" style="width: 100%"></div>
+          </div>
+          <div id="batteryText" class="value">100%</div>
+        </div>
+
+        <div class="telemetry-block">
+          <div class="label">Distance</div>
+          <div class="meter">
+            <div id="distanceBar" class="meter-bar" style="width: 0%"></div>
+          </div>
+          <div id="distanceText" class="value">0 / 0 km</div>
+        </div>
+
+        <div class="telemetry-block">
+          <div class="label">Speed</div>
+          <div id="speedText" class="value">0 m/s</div>
+        </div>
+
+        <div class="telemetry-block">
+          <div class="label">Altitude</div>
+          <div id="altitudeText" class="value">0 m</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="outcome-title">
+      <h2 id="outcome-title">Outcome & Insights</h2>
+      <div id="outcome" class="outcome">
+        <p>Configure a mission and click <strong>Simulate</strong> to preview energy use. Click <strong>Start</strong> to run a live simulation.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="viz-title">
+      <h2 id="viz-title">Route & Wind Visualization</h2>
+      <div class="viz" role="img" aria-label="Route visualization">
+        <canvas id="vizCanvas" width="800" height="220"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Drone Flying Simulation • Built with HTML/CSS/JavaScript</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
